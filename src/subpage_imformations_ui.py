@@ -4,8 +4,9 @@
 引用时可作 InfoUI 
 """
 
+from PySide2.QtWidgets import QFrame, QVBoxLayout
 import qfluentwidgets as qfw
-from PySide2.QtWidgets import QFrame, QVBoxLayout, QButtonGroup
+from qfluentwidgets import FluentIcon as FIF
 from app_config import AppCommonConfig
 from app_const_var import *
 
@@ -26,10 +27,23 @@ class InformationBoardCardGroup(qfw.GroupHeaderCardWidget):
             "../assets/images/imformations_ui_pic.png"
         )
 
+        # 网站超链接按钮
+        self.website_linkbutton = qfw.HyperlinkButton(
+            url="https://gitee.con/ydssj233/Sankteco/", text="", icon=FIF.BASKETBALL
+        )
+
         # 添加组件到分组中
-        self.addGroup(None, None, None, self.apppic_imagelabel)
+        self.addGroup(
+            FIF.INFO,
+            BasicString.NONE_TEXT,
+            BasicString.NONE_TEXT,
+            self.apppic_imagelabel,
+        )
         group = self.addGroup(
-            qfw.FluentIcon.INFO, AppString.APP_FULL_NAME, AppString.APP_COPYTYPE, None
+            FIF.INFO,
+            BasicString.APP_FULL_NAME,
+            BasicString.APP_COPYTYPE,
+            self.website_linkbutton,
         )
         group.setSeparatorVisible(True)
 
@@ -47,25 +61,32 @@ class SupportCardGroup(qfw.GroupHeaderCardWidget):
 
         # 帮助文档按钮
         self.offline_document_button = qfw.PushButton(
-            icon=qfw.FluentIcon.DOCUMENT, text=InfoUIString.SUPPTCARD_OFFLINEDOCBUTTON
+            icon=FIF.DOCUMENT, text=InfoUIString.SUPPTCARD_OFFLINEDOCBUTTON
         )
         self.online_document_button = qfw.PushButton(
-            icon=qfw.FluentIcon.SEARCH, text=InfoUIString.SUPPTCARD_ONLINEDOCBUTTON
+            icon=FIF.SEARCH, text=InfoUIString.SUPPTCARD_ONLINEDOCBUTTON
         )
 
         # 添加分组到组件中
         self.addGroup(
-            qfw.FluentIcon.DOCUMENT, InfoUIString.SUPPTCARD_OFFLINEDOCGROUP, None, self.offline_document_button
+            FIF.DOCUMENT,
+            InfoUIString.SUPPTCARD_OFFLINEDOCGROUPTITLE,
+            InfoUIString.SUPPTCARD_OFFLINEDOCGROUPCONTEXT,
+            self.offline_document_button,
         )
         group = self.addGroup(
-            qfw.FluentIcon.GLOBE, InfoUIString.SUPPTCARD_ONLINEDOCGROUP, None, self.online_document_button
+            FIF.GLOBE,
+            InfoUIString.SUPPTCARD_ONLINEDOCGROUPTITLE,
+            InfoUIString.SUPPTCARD_ONLINEDOCGROUPCONTEXT,
+            self.online_document_button,
         )
         group.setSeparatorVisible(True)
 
 
+"""语言 部分即日起迁往设置页面260131
 class LanguageCardGroup(qfw.GroupHeaderCardWidget):
-    """语言 部分，继承自 上下分组布局卡片 GroupHeaderCardWidget
-    引用时可作 LangCard"""
+    ""语言 部分，继承自 上下分组布局卡片 GroupHeaderCardWidget
+    引用时可作 LangCard""
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -83,18 +104,19 @@ class LanguageCardGroup(qfw.GroupHeaderCardWidget):
         # 语言选项卡
         self.languagecard = qfw.ComboBoxSettingCard(
             self.app_config.language,
-            qfw.FluentIcon.LANGUAGE,
+            FIF.LANGUAGE,
             InfoUIString.LANGCARD_LANGCARD_TITLE,
             InfoUIString.LANGCARD_LANGCARD_DETAIL,
             ["简体中文", "Esperanto"],
         )
 
         # 添加分组到组件中
-        group = self.addGroup(None, None, None, self.languagecard)
+        group = self.addGroup(BasicString.NONE_TEXT, BasicString.NONE_TEXT, BasicString.NONE_TEXT, self.languagecard)
         group.setSeparatorVisible(True)
 
         # 响应值更改信号
         # self.app_config.language.valueChanged.connect(print)
+"""
 
 
 class UpdateCardGroup(qfw.GroupHeaderCardWidget):
@@ -105,43 +127,34 @@ class UpdateCardGroup(qfw.GroupHeaderCardWidget):
         super().__init__(parent)
 
         # 选项卡组基本设置
-        self.setTitle("更新")
+        self.setTitle(InfoUIString.UPDATECARD_TITLE)
         self.setBorderRadius(8)
 
-        # 更新通道单选按钮
-        self.update_pipe_radiobutton_release = qfw.RadioButton(text="正式版")
-        self.update_pipe_radiobutton_beta = qfw.RadioButton(text="测试版")
-        self.update_pipe_radiobutton_group = QButtonGroup(self)
-        self.update_pipe_radiobutton_group.addButton(
-            self.update_pipe_radiobutton_release
-        )
-        self.update_pipe_radiobutton_group.addButton(self.update_pipe_radiobutton_beta)
-        # 设置默认项
-        self.update_pipe_radiobutton_release.setChecked(True)
+        # 更新通道下拉框
+        self.update_pipe_combobox = qfw.ComboBox()
+        self.update_pipe_combobox_item = [
+            InfoUIString.UPDATECARD_PIPE_RELEASE,
+            InfoUIString.UPDATECARD_PIPE_BETA,
+        ]
+        self.update_pipe_combobox.addItems(self.update_pipe_combobox_item)
 
         # 更新状态
         self.update_status_check_button = qfw.PushButton(
-            icon=qfw.FluentIcon.CHECKBOX, text="检查更新"
+            icon=FIF.CHECKBOX, text=InfoUIString.UPDATECARD_UPDATESTATUS
         )
-
-        # 当前版本
-        self.update_version_now = qfw.BodyLabel("version dev")
 
         # 添加分组到组件中
         self.addGroup(
-            qfw.FluentIcon.SETTING,
-            "更新通道",
-            "选择项目从何通道进行更新",
-            self.update_pipe_radiobutton_group,
-        )
-        self.addGroup(
-            qfw.InfoBarIcon.SUCCESS,
-            "当前版本已是最新版本",
-            None,
-            self.update_status_check_button,
+            FIF.SETTING,
+            InfoUIString.UPDATECARD_PIPEGROUP_TITLE,
+            InfoUIString.UPDATECARD_PIPEGROUP_DETAIL,
+            self.update_pipe_combobox,
         )
         group = self.addGroup(
-            qfw.FluentIcon.INFO, "当前版本", None, self.update_version_now
+            qfw.InfoBarIcon.SUCCESS,
+            InfoUIString.UPDATECARD_VERSTATUSGROUP_TITLE,
+            BasicString.APP_VERSION,
+            self.update_status_check_button,
         )
         group.setSeparatorVisible(True)
 
@@ -162,12 +175,12 @@ class SubpageInformationUI(QFrame):
         # 依次显示卡片组件
         self.information_board_card = InformationBoardCardGroup(self)
         self.support_card = SupportCardGroup(self)
-        self.language_card = LanguageCardGroup(self)
+        # self.language_card = LanguageCardGroup(self)
         self.update_card = UpdateCardGroup(self)
 
         # 组件布局
         self.main_layout = QVBoxLayout(self)
         self.main_layout.addWidget(self.information_board_card)
         self.main_layout.addWidget(self.support_card)
-        self.main_layout.addWidget(self.language_card)
+        # self.main_layout.addWidget(self.language_card)
         self.main_layout.addWidget(self.update_card)
