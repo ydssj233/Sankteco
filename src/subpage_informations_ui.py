@@ -1,11 +1,12 @@
 """
 子页面：信息
 此页面包含了本项目的相关信息，包含四部分：信息板、支持、语言、更新
-引用时可作 InfoUI 
+引用时可作 InfoUI / subpage_information
 """
 
 from PySide2.QtWidgets import QFrame, QVBoxLayout
 from PySide2.QtCore import Qt
+from PySide2.QtGui import QImage
 import qfluentwidgets as qfw
 from qfluentwidgets import FluentIcon as FIF
 from app_config import AppCommonConfig
@@ -18,14 +19,14 @@ class InformationBoardCardGroup(qfw.ElevatedCardWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        
-        # 图片预处理其及文本
+
+        # 图片文本
         self.apppic_imagelabel = qfw.ImageLabel(
-            r"..\\assets\\images\\informations.png", 
-            self
+            QImage(ImagePath.APP_DETAILEDIMAGE_PATH)
         )
-        self.apppic_imagelabel.scaledToHeight(320)
-        self.apppic_imagelabel.scaledToWidth(640)
+        self.apppic_imagelabel.setImage(
+            QImage(ImagePath.APP_DETAILEDIMAGE_PATH)
+        )
 
         # 项目信息
         self.infotext_bodylabel = qfw.BodyLabel(BasicString.APP_FULL_NAME, self)
@@ -33,13 +34,15 @@ class InformationBoardCardGroup(qfw.ElevatedCardWidget):
 
         # 组件布局
         self.vlayout = QVBoxLayout(self)
-        self.vlayout.setAlignment(self.vlayout, Qt.AlignLeft)
         self.vlayout.addStretch(1)
-        self.vlayout.addWidget(self.apppic_imagelabel, 0, Qt.AlignCenter)
+        self.vlayout.addWidget(self.apppic_imagelabel)
+        self.vlayout.setAlignment(self.apppic_imagelabel, Qt.AlignVCenter)
         self.vlayout.addStretch(1)
-        self.vlayout.addWidget(self.infotext_bodylabel, 0, Qt.AlignLeft)
+        self.vlayout.addWidget(self.infotext_bodylabel)
+        self.vlayout.setAlignment(self.infotext_bodylabel, Qt.AlignLeft)
         self.vlayout.addStretch(1)
-        self.vlayout.addWidget(self.infotext_captionlabel, 0, Qt.AlignLeft)
+        self.vlayout.addWidget(self.infotext_captionlabel)
+        self.vlayout.setAlignment(self.infotext_captionlabel, Qt.AlignLeft)
 
 
 class SupportCardGroup(qfw.GroupHeaderCardWidget):
@@ -143,12 +146,6 @@ class UpdateCardGroup(qfw.GroupHeaderCardWidget):
             self.update_status_check_button,
         )
         group.setSeparatorVisible(True)
-
-        # 响应值更改信号
-        """
-        self.update_pipe_radiobutton_group.buttonToggled.connect(
-            lambda button: print(button.text())
-        )"""
 
 
 class SubpageInformationUI(QFrame):

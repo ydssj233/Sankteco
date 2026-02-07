@@ -8,6 +8,8 @@ import gettext
 _ = gettext.gettext
 
 
+
+"""字符串常量"""
 class BasicString:
     """项目基础信息字符串类"""
 
@@ -51,4 +53,26 @@ class InfoUIString:
     UPDATECARD_PIPEGROUP_TITLE = _("更新通道")
     UPDATECARD_PIPEGROUP_DETAIL = _("选择项目从何通道进行更新")
     UPDATECARD_VERSTATUSGROUP_TITLE = _("当前版本已是最新版本")
-    UPDATECARD_VERNOWGROUP_TITLE = _("当前版本")
+    # UPDATECARD_VERNOWGROUP_TITLE = _("当前版本")
+
+
+class MainUIString:
+    """主界面 字符串，包含 main_ui.py 相关字符串，包含隶属于主程序多UI交互的字符串"""
+
+    # 子页面对象名
+    SUBPAGE_INFORMATION_OBJNAME = "subpage_information"
+
+    # 子页面导航窗口显示字段
+    SUBPAGE_INFORMATION_NAVNAME = _("信息")
+
+
+
+"""相对路径常量"""
+class ImagePath:
+    """图片资源相对路径类"""
+
+    # 图标
+    APP_ICON_PATH = "../assets/icon/appico.png"
+
+    # 项目详细图
+    APP_DETAILEDIMAGE_PATH = "../assets/images/informations_ui_pic.png"
