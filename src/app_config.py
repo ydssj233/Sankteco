@@ -1,8 +1,10 @@
 """
 应用配置类，用于保存项目的所有可调整设置
+引用时可作 AppConfig 
 """
 
 from enum import Enum
+from app_const_var import *
 import qfluentwidgets as qfw
 
 
@@ -71,8 +73,8 @@ class AppCommonConfig(qfw.QConfig):
 
     # 语言
     language = qfw.OptionsConfigItem(
-        "Language",
-        "Language",
+        AppConfigString.LANGUAGE_GROUP,
+        AppConfigString.LANGUAGE_NAME,
         LanguageEnum.ZH_CN,
         qfw.OptionsValidator([LanguageEnum.ZH_CN, LanguageEnum.EO]),
         restart=True,
@@ -80,8 +82,8 @@ class AppCommonConfig(qfw.QConfig):
 
     # 动画精美度
     carton_beauty_level = qfw.OptionsConfigItem(
-        "Basic",
-        "carton_beauty_level",
+        AppConfigString.BASIC_GROUP,
+        AppConfigString.BASIC_CARTON_BEAUTY_LEVEL_NAME,
         BChoooseCartonBeautyEnum.FANCY,
         qfw.OptionsValidator(
             [
@@ -96,8 +98,8 @@ class AppCommonConfig(qfw.QConfig):
 
     # 结果推送方式
     show_result_way = qfw.OptionsConfigItem(
-        "Basic",
-        "show_result_way",
+        AppConfigString.BASIC_GROUP,
+        AppConfigString.BASIC_SHOW_RESULT_WAY_NAME,
         FChooseShowResultWayEnum.MESSAGEBOX,
         qfw.OptionsValidator(
             [
@@ -110,36 +112,65 @@ class AppCommonConfig(qfw.QConfig):
     )
 
     # 音乐开关
-    music_switch = qfw.ConfigItem("Av", "music_switch", False, qfw.BoolValidator())
+    music_switch = qfw.ConfigItem(
+        AppConfigString.AV_GROUP,
+        AppConfigString.AV_MUSIC_PATH_NAME,
+        False,
+        qfw.BoolValidator(),
+    )
 
     # 音乐路径
-    music_path = qfw.ConfigItem("Av", "music_path", "", str)
+    music_path = qfw.ConfigItem(
+        AppConfigString.AV_GROUP,
+        AppConfigString.AV_MUSIC_PATH_NAME,
+        AssetsPath.APP_DEFAULT_MUSIC_PATH,
+        qfw.FolderValidator(),
+    )
 
     # 音乐音量调节
     music_volume = qfw.RangeConfigItem(
-        "Av", "music_volume", 80, qfw.RangeValidator(0, 100)
+        AppConfigString.AV_GROUP,
+        AppConfigString.AV_MUSIC_VOLUME_NAME,
+        80,
+        qfw.RangeValidator(0, 100),
     )
 
     # 音乐渐入效果
     music_play_smoothly = qfw.RangeConfigItem(
-        "Av", "music_play_smoothly", 0, qfw.RangeValidator(0, 5)
+        AppConfigString.AV_GROUP,
+        AppConfigString.AV_MUSIC_PLAY_SMOOTHLY_NAME,
+        0,
+        qfw.RangeValidator(0, 5),
     )
 
     # 音乐渐出效果
     music_pause_smoothly = qfw.RangeConfigItem(
-        "Av", "music_pause_smoothly", 0, qfw.RangeValidator(0, 5)
+        AppConfigString.AV_GROUP,
+        AppConfigString.AV_MUSIC_PAUSE_SMOOTHLY_NAME,
+        0,
+        qfw.RangeValidator(0, 5),
     )
 
     # 音效开关
-    sound_switch = qfw.ConfigItem("Av", "sound_switch", True, qfw.BoolValidator())
+    sound_switch = qfw.ConfigItem(
+        AppConfigString.AV_GROUP,
+        AppConfigString.AV_SOUND_SWITCH_NAME,
+        True,
+        qfw.BoolValidator(),
+    )
 
     # 音效路径
-    sound_path = qfw.ConfigItem("Av", "sound_path", "assets/sounds/notice.wav", str)
+    sound_path = qfw.ConfigItem(
+        AppConfigString.AV_GROUP,
+        AppConfigString.AV_SOUND_PATH_NAME,
+        AssetsPath.APP_DEFAULT_SOUND_PATH,
+        qfw.FolderValidator(),
+    )
 
     # 音效在何时播放
     sound_play_time = qfw.OptionsConfigItem(
-        "Av",
-        "sound_play_time",
+        AppConfigString.AV_GROUP,
+        AppConfigString.AV_SOUND_PLAY_TIME_NAME,
         qfw.OptionsValidator(
             [
                 SoundPlayTimeEnum.BCHOOSE,
@@ -150,12 +181,17 @@ class AppCommonConfig(qfw.QConfig):
     )
 
     # 朗读开关
-    read_switch = qfw.ConfigItem("Av", "read_switch", True, qfw.BoolValidator())
+    read_switch = qfw.ConfigItem(
+        AppConfigString.AV_GROUP,
+        AppConfigString.AV_READ_SWITCH_NAME,
+        True,
+        qfw.BoolValidator(),
+    )
 
     # 在何时朗读
     read_time = qfw.OptionsConfigItem(
-        "Av",
-        "read_time",
+        AppConfigString.AV_GROUP,
+        AppConfigString.AV_READ_TIME_NAME,
         qfw.OptionsValidator(
             [
                 ReadTimeEnum.BCHOOSE,

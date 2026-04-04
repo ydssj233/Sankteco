@@ -93,6 +93,6 @@ class MainWindow(FluentWindow):
         # 设置窗口大小
         self.resize(1080, 768)
         # 设置窗口图标
-        self.setWindowIcon(QIcon(AssetsPath.APP_ICON_PATH))  # type: ignore
+        self.setWindowIcon(QIcon(AssetsPathTXT.APP_ICON_PATH))  # type: ignore
         # 设置窗口标题
         self.setWindowTitle(f"{BasicString.APP_FULL_NAME} - {BasicString.APP_VERSION}")

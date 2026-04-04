@@ -13,7 +13,7 @@ from app_config import *
 
 # 加载配置文件
 sett_basic_ui_cfg = AppCommonConfig()
-qfw.qconfig.load(AssetsPath.APP_CONFIG, AppCommonConfig)
+qfw.qconfig.load(AssetsPathTXT.APP_CONFIG, AppCommonConfig)
 
 
 class NowNamelistSettingCard(qfw.ExpandGroupSettingCard):

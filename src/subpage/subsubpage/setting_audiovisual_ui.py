@@ -1,6 +1,6 @@
 """
 孙页面：视听（ 首选项 的子页面），
-此页面包含了视觉效果与音频效果等可调整设置选项，包含三个部分：音乐、音效、朗读、主题、字体、一言，
+此页面包含了视觉效果与音频效果等可调整设置选项，包含六个部分：音乐、音效、朗读、主题、字体、一言，
 引用时可作 SettAvUI / subsubpage_setting_audiovisual
 """
 
@@ -21,7 +21,7 @@ from app_config import *
 
 # 加载配置文件
 sett_av_ui_cfg = AppCommonConfig()
-qfw.qconfig.load(AssetsPath.APP_CONFIG, AppCommonConfig)
+qfw.qconfig.load(AssetsPathTXT.APP_CONFIG, AppCommonConfig)
 
 
 def set_widget_to_layout(wlist: list, layout: QLayout):

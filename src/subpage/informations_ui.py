@@ -4,10 +4,53 @@
 引用时可作 InfoUI / information_ui
 """
 
-from PySide2.QtWidgets import QFrame, QVBoxLayout
+from PySide2.QtWidgets import (
+    QFrame,
+    QVBoxLayout,
+    QGraphicsView,
+)
+from PySide2.QtCore import Qt
 import qfluentwidgets as qfw
 from qfluentwidgets import FluentIcon as FI
 from app_const_var import *
+
+
+class ImageViewer(QGraphicsView):
+    """图片显示控件，继承自 QGraphicsView"""
+
+    from typing import Optional
+    from PySide2.QtWidgets import QWidget
+
+    def __init__(self, parent: Optional[QWidget] = None):
+        from PySide2.QtWidgets import QGraphicsScene, QGraphicsPixmapItem
+        from PySide2.QtGui import QPainter
+
+        super(ImageViewer, self).__init__(parent)
+
+        # 创建一个 QGraphicsScene 对象并设置其父对象为当前的 ImageViewer
+        self.scene = QGraphicsScene(self)  # type: ignore
+
+        # 创建一个 QGraphicsPixmapItem 对象，用于显示图片
+        self.imageItem = QGraphicsPixmapItem()  # type: ignore
+
+        self.scene.addItem(self.imageItem)
+        self.setScene(self.scene)
+
+        # 启用平滑变换
+        self.setRenderHint(QPainter.SmoothPixmapTransform)
+
+    def setPixmap(self, pic: str):
+        from PySide2.QtGui import QPixmap
+
+        pixmap = QPixmap(pic)
+        self.imageItem.setPixmap(pixmap)
+
+    def resizeEvent(self, event):
+
+        super(ImageViewer, self).resizeEvent(event)
+
+        # 根据窗口大小自动调整图片大小
+        self.fitInView(self.imageItem, Qt.KeepAspectRatio)  # type: ignore
 
 
 class InformationBoardCardGroup(qfw.ElevatedCardWidget):
@@ -17,10 +60,9 @@ class InformationBoardCardGroup(qfw.ElevatedCardWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        from PySide2.QtCore import Qt
-
         # 项目详细图
-        self.app_detailed_image = qfw.ImageLabel(AssetsPath.APP_DETAILEDIMAGE_PATH)
+        self.app_detailed_image = ImageViewer()
+        self.app_detailed_image.setPixmap(AssetsPathTXT.APP_DETAILEDIMAGE_PATH)
 
         # 项目信息
         self.infotext_bodylabel = qfw.StrongBodyLabel(BasicString.APP_FULL_NAME, self)

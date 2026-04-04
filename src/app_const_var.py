@@ -3,6 +3,7 @@
 """
 
 import gettext
+from pathlib import Path
 
 
 _ = gettext.gettext
@@ -21,7 +22,33 @@ class BasicString:
     APP_FULL_NAME = "祈福Sankteco"
     APP_VERSION = "Version Dev"
     APP_VERSION_TYPE = "Dev"
-    APP_COPYTYPE = "Copyleft, GPL-3.0, 2023~2026, HXES.As is."
+    APP_COPYTYPE = "Copyleft, GPL-3.0, ĈTEL, 2023~2026."
+
+
+class AppConfigString:
+    """应用配置类 的字符串，仅包含 app_config.py 相关字符串"""
+
+    # 语言 类字符串
+    LANGUAGE_GROUP = "Language"
+    LANGUAGE_NAME = "language"
+
+    # 基本 类字符串
+    BASIC_GROUP = "Basic"
+    BASIC_CARTON_BEAUTY_LEVEL_NAME = "carton_beauty_level"
+    BASIC_SHOW_RESULT_WAY_NAME = "show_result_way"
+
+    # 视听 类字符串
+    AV_GROUP = "Av"
+    AV_MUSIC_SWITCH_NAME = "music_switch"
+    AV_MUSIC_PATH_NAME = "music_path"
+    AV_MUSIC_VOLUME_NAME = "music_volume"
+    AV_MUSIC_PLAY_SMOOTHLY_NAME = "music_play_smoothly"
+    AV_MUSIC_PAUSE_SMOOTHLY_NAME = "music_pause_smoothly"
+    AV_SOUND_SWITCH_NAME = "sound_switch"
+    AV_SOUND_PATH_NAME = "sound_path"
+    AV_SOUND_PLAY_TIME_NAME = "sound_play_time"
+    AV_READ_SWITCH_NAME = "read_switch"
+    AV_READ_TIME_NAME = "read_time"
 
 
 class InfoUIString:
@@ -140,6 +167,14 @@ class SettBasicUIString:
     F_CHOOSE_SETT_GR_NAVNAME = _("快速抽选")
 
 
+class SettAvUIString:
+    """首选项-视听 界面字符串，仅包含 setting_audiovisual_ui.py 相关字符串，不包含隶属于主程序多UI交互的字符串"""
+
+    # 音乐 部分
+    # 音乐开关
+    
+
+
 class MainUIString:
     """主界面 字符串，包含 main_ui.py 相关字符串，包含隶属于主程序多UI交互的字符串"""
 
@@ -157,8 +192,8 @@ class MainUIString:
 """相对路径常量"""
 
 
-class AssetsPath:
-    """资源相对路径类"""
+class AssetsPathTXT:
+    """资源相对路径纯文本类"""
 
     # 图片
     # 图标
@@ -169,3 +204,21 @@ class AssetsPath:
 
     # 配置文件
     APP_CONFIG = "config/app_config.json"
+
+    # 音频
+    # 默认音乐
+    APP_DEFAULT_MUSIC_PATH = ""
+
+    # 默认音效
+    APP_DEFAULT_SOUND_PATH = "assets/sounds/notice.wav"
+
+
+class AssetsPath:
+    """资源相对路径类"""
+
+    # 音频
+    # 默认音乐
+    APP_DEFAULT_MUSIC_PATH = Path(AssetsPathTXT.APP_DEFAULT_MUSIC_PATH)
+
+    # 默认音效
+    APP_DEFAULT_SOUND_PATH = Path(AssetsPathTXT.APP_DEFAULT_SOUND_PATH)
