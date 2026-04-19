@@ -209,7 +209,7 @@ class SettingBasicUI(QFrame):
         self.pivot.setCurrentItem(self.namelist_interface.objectName())
 
         # 调整布局
-        self.vboxlayout.setContentsMargins(QMargins(30, 0, 30, 0))
+        self.vboxlayout.setContentsMargins(QMargins(30, 30, 30, 30))
         self.vboxlayout.addWidget(self.pivot)
         self.vboxlayout.setAlignment(self.pivot, Qt.AlignCenter)
         self.vboxlayout.addWidget(self.stackedWidget)

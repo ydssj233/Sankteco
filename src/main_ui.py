@@ -29,6 +29,7 @@ class MainWindow(FluentWindow):
         # 连接设置子页面信号
         self.subpage_settings.to_basic_card.clicked.connect(lambda: self.switchTo(self.subsubpage_setting_basic))  # type: ignore
         self.subpage_settings.to_audiovisual_card.clicked.connect(lambda: self.switchTo(self.subsubpage_setting_audiovisual))  # type: ignore
+        self.subpage_settings.to_language_card.clicked.connect(lambda:self.switchTo(self.subsubpage_setting_language))  # type: ignore
 
     async def import_subpage_information(self):
         """导入并重命名 信息 子页面的协程"""
@@ -42,6 +43,7 @@ class MainWindow(FluentWindow):
         from subpage.settings_ui import SettingsUI
         from subpage.subsubpage.setting_basic_ui import SettingBasicUI
         from subpage.subsubpage.setting_audiovisual_ui import SettingAudiovisualUI
+        from subpage.subsubpage.setting_language_ui import SettingLanguageUI
 
         # 设置 子页面
         self.subpage_settings = SettingsUI(self)
@@ -59,6 +61,12 @@ class MainWindow(FluentWindow):
             MainUIString.SUBSUBPAGE_SETTIING_AUDIOVISUAL_OBJNAME
         )
 
+        # 语言 孙页面
+        self.subsubpage_setting_language = SettingLanguageUI(self)
+        self.subsubpage_setting_language.setObjectName(
+            MainUIString.SUBSUBPAGE_SETTIING_LANGUAGE_OBJNAME
+        )
+
     async def import_subpage_main(self):
         """导入子页面的基础函数"""
 
@@ -72,7 +80,7 @@ class MainWindow(FluentWindow):
         """初始化导航栏，添加各个子界面"""
         from qfluentwidgets import NavigationItemPosition
 
-        # 添加子界面
+        # 添加子界面及各自的孙页面
         self.addSubInterface(
             self.subpage_settings,
             FI.SETTING,
@@ -89,6 +97,12 @@ class MainWindow(FluentWindow):
             self.subsubpage_setting_audiovisual,
             FI.MEDIA,
             MainUIString.SUBSUBPAGE_SETTIING_AUDIOVISUAL_NAVNAME,
+            parent=self.subpage_settings,
+        )
+        self.addSubInterface(
+            self.subsubpage_setting_language,
+            FI.LANGUAGE,
+            MainUIString.SUBSUBPAGE_SETTIING_LANGUAGE_NAVNAME,
             parent=self.subpage_settings,
         )
         self.addSubInterface(

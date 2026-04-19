@@ -251,20 +251,41 @@ class SettAvUIString:
     THEME_SETT_GR_NAVNAME = _("主题")
 
 
+class SettLangUIString:
+    """首选项-语言 界面字符串，仅包含 setting_language_ui.py 相关字符串，不包含隶属于主程序多UI交互的字符串"""
+
+    # 语言选择
+    SCREEN_LANGUAGE_TITLE = _("显示语言")
+    SCREEN_LANGUAGE_CONTEXT = _("选择将在屏幕上显示的语言")
+    SCREEN_LANGUAGE_TEXT_ZH_CN = _("简体中文")
+    SCREEN_LANGUAGE_TEXT_EO = _("世界语")
+
+    # 加入翻译计划
+    JOIN_TRANSLATION_TITLE = _("加入翻译计划")
+    JOIN_TRANSLATION_CONTEXT = _("加入项目的在线翻译工程，为本地化做出贡献")
+    JOIN_TRANSLATION_HYPERLINK_TEXT = _("跳转")
+
+
 class MainUIString:
     """主界面 字符串，包含 main_ui.py 相关字符串，包含隶属于主程序多UI交互的字符串"""
 
     # 子页面对象名
     SUBPAGE_INFORMATION_OBJNAME = "subpage_information"
     SUBPAGE_SETTINGS_OBJNAME = "subpage_settings"
+
+    # 设置 孙页面对象名
     SUBSUBPAGE_SETTIING_BASIC_OBJNAME = "subsubpage_setting_basic"
     SUBSUBPAGE_SETTIING_AUDIOVISUAL_OBJNAME = "subsubpage_setting_audiovisual"
+    SUBSUBPAGE_SETTIING_LANGUAGE_OBJNAME = "subsubpage_setting_language"
 
     # 子页面导航窗口显示字段
     SUBPAGE_INFORMATION_NAVNAME = _("信息")
     SUBPAGE_SETTINGS_NAVNAME = _("首选项")
+
+    # 设置 孙页面导航窗口显示字段
     SUBSUBPAGE_SETTIING_BASIC_NAVNAME = _("基本")
     SUBSUBPAGE_SETTIING_AUDIOVISUAL_NAVNAME = _("视听")
+    SUBSUBPAGE_SETTIING_LANGUAGE_NAVNAME = _("语言")
 
 
 """相对路径常量"""
@@ -289,6 +310,10 @@ class AssetsPathTXT:
 
     # 默认音效
     APP_DEFAULT_SOUND_PATH = "assets/sounds/notice.wav"
+
+    # 链接
+    # 加入翻译计划（ 语言 孙页面）
+    JOIN_TRANSLATION_LINK = ""
 
 
 class AssetsPath:

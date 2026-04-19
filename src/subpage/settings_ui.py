@@ -45,7 +45,7 @@ class SettingsUI(QFrame):
             self.vboxlayout.addWidget(widget)
 
         # 调整布局
-        self.vboxlayout.setContentsMargins(QMargins(30, 0, 30, 0))
+        self.vboxlayout.setContentsMargins(QMargins(30, 30, 30, 30))
 
     def init_widgets(self):
         """初始化控件"""

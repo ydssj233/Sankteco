@@ -10,7 +10,6 @@ from PySide2.QtWidgets import (
     QWidget,
     QLayout,
 )
-from PySide2.QtCore import Qt
 import qfluentwidgets as qfw
 from qfluentwidgets import FluentIcon as FI
 from app_const_var import *
@@ -299,7 +298,7 @@ class SettingAudiovisualUI(QFrame):
         self.pivot.setCurrentItem(self.music_interface.objectName())
 
         # 调整布局
-        self.vboxlayout.setContentsMargins(QMargins(30, 0, 30, 0))
+        self.vboxlayout.setContentsMargins(QMargins(30, 30, 30, 30))
         self.vboxlayout.addWidget(self.pivot)
         self.vboxlayout.setAlignment(self.pivot, Qt.AlignCenter)
         self.vboxlayout.addWidget(self.stackedWidget)
